@@ -1,0 +1,27 @@
+{% extends 'results_app/navbar.html' %} {% block content %}
+<div class="container p-3 d-flex flex-wrap">
+  {% if result %} {% for item in result%}
+  <div class="p-3">
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">{{item.0}}</h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <p class="card-title">{{item.1}} votes</p>
+      </div>
+    </div>
+  </div>
+  {% endfor%} {% else %}
+  <div class="p-3">
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <p>No results from this polling unit</p>
+        <a href="{% url 'index' %}">back home</a>
+      </div>
+      <p />
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

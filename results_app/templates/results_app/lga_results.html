@@ -1,17 +1,44 @@
 {% extends 'results_app/navbar.html' %} {% block content %}
 <div class="container p-3 d-flex flex-wrap">
-  {% for item in result%}
+  {% if result %} {% for item in result%}
   <div class="p-3">
     <div class="card" style="width: 18rem">
       <div class="card-body">
-        <h5 class="card-title">{{item.0}}</h5>
+        <h5 class="card-title">{{item.1}}</h5>
       </div>
       <hr />
       <div class="card-body">
-        <h3 class="card-title">{{item.1}} votes</h3>
+        <a href="{% url 'polling_unit' item.0 %}">View Results</a>
       </div>
     </div>
   </div>
   {% endfor%}
+  <div class="container bg-dark">
+    <h2 style="color: #fff">Total Results</h2>
+  </div>
+  <div class="container-fluid p-3 bg-light d-flex flex-wrap">
+    {% for item in votes %}
+    <div class="p-3">
+      <div class="card" style="width: 16rem">
+        <div class="card-body">
+          <p>{{item.0}}</p>
+          <p>{{item.1}} votes</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="p-3">
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">No polling unit under this local government</h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <a href="index.html">Go back</a>
+      </div>
+    </div>
+  </div>
 </div>
-{% endblock content %}
+{% endif %} {% endblock content %}
